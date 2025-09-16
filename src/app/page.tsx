@@ -7,6 +7,8 @@ import EnhancingBrainHealthSection from '@/components/EnhancingBrainHealthSectio
 import CustomerTestimonialsSection from '@/components/CustomerTestimonialsSection';
 import ProductShowcaseSection from '@/components/ProductShowcaseSection';
 import VielightBenefitsSection from '@/components/VielightBenefitsSection';
+import FAQSection from '@/components/Faq';
+import FooterSection from '@/components/FooterSection';
 
 export default function Home() {
   return (
@@ -20,6 +22,8 @@ export default function Home() {
       <CustomerTestimonialsSection />
       <ProductShowcaseSection />
        <VielightBenefitsSection />
+       <FAQSection />
+       <FooterSection />
     </main>
   );
 }

@@ -210,7 +210,7 @@ const HeroSection: React.FC = () => {
                     {/* Logo */}
                     <div className="flex items-center">
                         <Image
-                            src="/logo.png"
+                            src="/logo1.png"
                             alt="PBM Distributors"
                             width={120}
                             height={60}
