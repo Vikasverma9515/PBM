@@ -143,3 +143,4 @@ export default async function AdminOrders() {
       </div>
     </main>
   )
+}
