@@ -821,11 +821,12 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Minus, Plus, ArrowRight } from 'lucide-react';
+import { Minus, Plus, ArrowRight, Play } from 'lucide-react';
 import Header from '@/components/header';
 import { Product } from '@/types/Product';
 import { useCart } from '@/context/CartContext';
 import FooterSection from '../FooterSection';
+
 
 interface ProductDetailSectionProps {
     product: Product;
@@ -895,7 +896,7 @@ const ProductDetailSection: React.FC<ProductDetailSectionProps> = ({ product }) 
                     <div className="flex gap-6">
                         {/* Thumbnail Images */}
                         <div className="hidden sm:flex sm:flex-col sm:space-y-4">
-                            {images.map((image, index) => (
+                            {/* {images.map((image, index) => (
                                 <button
                                     key={index}
                                     onClick={() => setSelectedImage(index)}
@@ -910,11 +911,28 @@ const ProductDetailSection: React.FC<ProductDetailSectionProps> = ({ product }) 
                                         className="w-full h-full object-cover"
                                     />
                                 </button>
-                            ))}
+                            ))} */}
+                            {images.map((image: string, index: number) => (
+    <button
+        key={index}
+        onClick={() => setSelectedImage(index)}
+        className={`w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-colors ${
+            selectedImage === index ? 'border-[#EA1934]' : 'border-gray-200'
+        }`}
+    >
+        <Image
+            src={image}
+            alt={`${product.name} view ${index + 1}`}
+            width={80}
+            height={80}
+            className="w-full h-full object-cover"
+        />
+    </button>
+))}
 
                             {/* Mobile thumbnails (horizontal scroll) */}
                             <div className="sm:hidden flex gap-3 overflow-x-auto py-2">
-                                {images.map((image, index) => (
+                                {/* {images.map((image, index) => (
                                     <button
                                         key={`mobile-${index}`}
                                         onClick={() => setSelectedImage(index)}
@@ -928,7 +946,24 @@ const ProductDetailSection: React.FC<ProductDetailSectionProps> = ({ product }) 
                                             className="w-full h-full object-cover"
                                         />
                                     </button>
-                                ))}
+                                ))} */}
+                                {images.map((image: string, index: number) => (
+    <button
+        key={`mobile-${index}`}
+        onClick={() => setSelectedImage(index)}
+        className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors ${
+            selectedImage === index ? 'border-[#EA1934]' : 'border-gray-200'
+        }`}
+    >
+        <Image
+            src={image}
+            alt={`${product.name} view ${index + 1}`}
+            width={64}
+            height={64}
+            className="w-full h-full object-cover"
+        />
+    </button>
+))}
                             </div>
                         </div>
 
@@ -1126,11 +1161,16 @@ const ProductDetailSection: React.FC<ProductDetailSectionProps> = ({ product }) 
 
                                     {/* Benefits Tags */}
                                     <div className="flex flex-wrap gap-3">
-                                        {benefits.map((benefit) => (
+                                        {/* {benefits.map((benefit) => (
                                             <span key={benefit} className="px-4 py-2 border border-gray-400 rounded-full text-sm">
                                                 {benefit}
                                             </span>
-                                        ))}
+                                        ))} */}
+                                        {benefits.map((benefit: string) => (
+    <span key={benefit} className="px-4 py-2 border border-gray-400 rounded-full text-sm">
+        {benefit}
+    </span>
+))}
                                     </div>
 
                                     <p className="text-gray-700 leading-relaxed">
@@ -1175,14 +1215,22 @@ const ProductDetailSection: React.FC<ProductDetailSectionProps> = ({ product }) 
                                                 <p className="text-lg font-semibold text-black mb-6">Each device comes with:</p>
 
                                                 <div className="space-y-4">
-                                                    {whatsInBox.map((item, index) => (
+                                                    {/* {whatsInBox.map((item, index) => (
                                                         <div key={index} className="flex items-center space-x-3">
                                                             <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
                                                                 {index + 1}
                                                             </div>
                                                             <span className="text-black font-medium">{item}</span>
                                                         </div>
-                                                    ))}
+                                                    ))} */}
+                                                    {whatsInBox.map((item: string, index: number) => (
+    <div key={index} className="flex items-center space-x-3">
+        <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+            {index + 1}
+        </div>
+        <span className="text-black font-medium">{item}</span>
+    </div>
+))}
                                                 </div>
                                             </div>
 
@@ -1225,7 +1273,7 @@ const ProductDetailSection: React.FC<ProductDetailSectionProps> = ({ product }) 
                                             </p>
 
                                             <div className="flex flex-wrap gap-4">
-                                                {userGuides.map((guide, index) => (
+                                                {/* {userGuides.map((guide, index) => (
                                                     <a
                                                         key={index}
                                                         href={guide.url}
@@ -1235,7 +1283,18 @@ const ProductDetailSection: React.FC<ProductDetailSectionProps> = ({ product }) 
                                                     >
                                                         {guide.title}
                                                     </a>
-                                                ))}
+                                                ))} */}
+                                                {userGuides.map((guide: any, index: number) => (
+    <a
+        key={index}
+        href={guide.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
+    >
+        {guide.title}
+    </a>
+))}
                                             </div>
                                         </div>
 
@@ -1245,7 +1304,7 @@ const ProductDetailSection: React.FC<ProductDetailSectionProps> = ({ product }) 
                                                 <h4 className="text-xl font-bold text-blue-600 mb-6">Video tutorials</h4>
 
                                                 <div className="space-y-6">
-                                                    {videos.map((video, index) => (
+                                                    {/* {videos.map((video, index) => (
                                                         <div key={index} className="relative rounded-2xl overflow-hidden bg-gray-400">
                                                             <Image
                                                                 src={video.thumbnail}
@@ -1267,7 +1326,30 @@ const ProductDetailSection: React.FC<ProductDetailSectionProps> = ({ product }) 
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    ))}
+                                                    ))} */}
+                                                    {videos.map((video: any, index: number) => (
+    <div key={index} className="relative rounded-2xl overflow-hidden bg-gray-400">
+        <Image
+            src={video.thumbnail}
+            alt={video.title}
+            width={800}
+            height={400}
+            className="w-full h-64 object-cover"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+            <div className="text-center text-white">
+                <h5 className="text-2xl font-bold mb-2">{video.title}</h5>
+                <button
+                    onClick={() => window.open(video.url, '_blank')}
+                    className="flex items-center space-x-2 bg-white bg-opacity-20 px-6 py-3 rounded-full backdrop-blur-sm hover:bg-opacity-30 transition-colors mx-auto"
+                >
+                    <Play className="w-5 h-5" />
+                    <span className="font-medium">Watch the video</span>
+                </button>
+            </div>
+        </div>
+    </div>
+))}
                                                 </div>
                                             </div>
                                         )}
@@ -1295,7 +1377,8 @@ const ProductDetailSection: React.FC<ProductDetailSectionProps> = ({ product }) 
                                     <h2 className="text-3xl font-bold text-blue-600">Advanced Technology</h2>
 
                                     <p className="text-gray-700 leading-relaxed text-lg">
-                                        {product.shortDescription} featuring cutting-edge photobiomodulation technology for optimal brain health and cognitive enhancement.
+                                        {/* {product.shortDescription} featuring cutting-edge photobiomodulation technology for optimal brain health and cognitive enhancement. */}
+                                        {shortDescription || product.description} featuring cutting-edge photobiomodulation technology for optimal brain health and cognitive enhancement.
                                     </p>
 
                                     <div className="space-y-4">
