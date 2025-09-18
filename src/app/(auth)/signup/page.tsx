@@ -1,4 +1,5 @@
 // app/auth/signup/page.tsx
+// import SignUpForm from '@/components/auth/SignUpForm'
 import SignUpForm from '@/components/auth/SignUpForm'
 import Header from '@/components/header'
 
