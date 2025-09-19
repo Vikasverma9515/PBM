@@ -159,7 +159,7 @@ const Header: React.FC = () => {
                         {/* Logo */}
                         <Link href="/" className="flex items-center flex-shrink-0">
                             <Image
-                                src="/logo1.png"
+                                src="/Logo1.png"
                                 alt="PBM Distributors"
                                 width={100}
                                 height={50}

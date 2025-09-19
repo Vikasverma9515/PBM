@@ -31,7 +31,7 @@
 import { notFound } from 'next/navigation';
 // import ProductDetailSection from '@/components/ProductDetailSection';
 import ProductDetailSection from '@/components/Product/ProductDetailSection';
-import { createClient } from '@/lib/supabase/server';
+import { supabasePublic } from '@/lib/supabase/public';
 import { Product } from '@/types/Product';
 
 interface ProductPageProps {
@@ -42,9 +42,7 @@ interface ProductPageProps {
 
 async function getProduct(slug: string): Promise<Product | null> {
   try {
-    const supabase = await createClient();
-    
-    const { data: product, error } = await supabase
+    const { data: product, error } = await supabasePublic
       .from('products')
       .select('*')
       .eq('slug', slug)
@@ -80,9 +78,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 // Generate static params for all products (optional for better performance)
 export async function generateStaticParams() {
   try {
-    const supabase = await createClient();
-
-    const { data: products } = await supabase
+    const { data: products } = await supabasePublic
       .from('products')
       .select('slug')
       .eq('active', true);

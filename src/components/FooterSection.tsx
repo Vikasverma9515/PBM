@@ -199,7 +199,7 @@ const FooterSection: React.FC = () => {
                     {/* Logo & Newsletter Section */}
                     <div className="text-center mb-8">
                         <Image
-                            src="/logo1.png"
+                            src="/Logo1.png"
                             alt="PBM Distributors"
                             width={100}
                             height={50}
@@ -333,7 +333,7 @@ const FooterSection: React.FC = () => {
                             {/* Logo */}
                             <div>
                                 <Image
-                                    src="/logo1.png"
+                                    src="/Logo1.png"
                                     alt="PBM Distributors"
                                     width={120}
                                     height={60}
