@@ -3,10 +3,10 @@ import { requireAdmin } from '@/lib/auth-guard'
 import { supabaseAdmin } from '@/lib/supabase/admin'
 import Link from 'next/link'
 
-export default async function AdminOrderDetail({ params }: { params: Promise<{ id: string }> }) {
+export default async function AdminOrderDetail({ params }: { params: { id: string } }) {
   await requireAdmin()
 
-  const { id: orderId } = await params
+  const { id: orderId } = params
 
   const { data: order, error } = await supabaseAdmin
     .from('orders')

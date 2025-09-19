@@ -218,13 +218,13 @@ async function requireAdmin() {
 // Update order status and tracking
 export async function PATCH(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   const session = await requireAdmin()
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   try {
-    const { id } = await params
+    const { id } = params
     const { status, carrier, tracking_number } = await request.json()
 
     const updates: Record<string, any> = {}
@@ -257,13 +257,13 @@ export async function PATCH(
 // Capture a payment (if manual capture is used)
 export async function POST(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   const session = await requireAdmin()
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   try {
-    const { id } = await params
+    const { id } = params
     const { action, amount } = await request.json()
 
     const supabase = getSupabaseAdmin()

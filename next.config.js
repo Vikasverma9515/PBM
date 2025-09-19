@@ -17,6 +17,7 @@ const nextConfig = {
     domains: [
       'images.unsplash.com',
       'via.placeholder.com',
+      'qfynqbizqsyponqsfjby.supabase.co',
     ],
   },
   serverExternalPackages: ['@supabase/supabase-js'],

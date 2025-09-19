@@ -31,28 +31,24 @@
 import { notFound } from 'next/navigation';
 // import ProductDetailSection from '@/components/ProductDetailSection';
 import ProductDetailSection from '@/components/Product/ProductDetailSection';
-import { supabasePublic } from '@/lib/supabase/public';
+import { getSupabasePublic } from '@/lib/supabase/public';
 import { Product } from '@/types/Product';
 
 interface ProductPageProps {
-  params: Promise<{
-    id: string;
-  }>;
+  params: { id: string };
 }
 
 async function getProduct(slug: string): Promise<Product | null> {
   try {
-    const { data: product, error } = await supabasePublic
+    const supabase = getSupabasePublic();
+    const { data: product, error } = await supabase
       .from('products')
       .select('*')
       .eq('slug', slug)
       .eq('active', true)
       .single();
 
-    if (error || !product) {
-      return null;
-    }
-
+    if (error || !product) return null;
     return product;
   } catch (error) {
     console.error('Failed to fetch product:', error);
@@ -61,7 +57,7 @@ async function getProduct(slug: string): Promise<Product | null> {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = await params;
+  const { id } = params;
   const product = await getProduct(id);
 
   if (!product) {
@@ -75,32 +71,27 @@ export default async function ProductPage({ params }: ProductPageProps) {
   );
 }
 
-// Generate static params for all products (optional for better performance)
 export async function generateStaticParams() {
   try {
-    const { data: products } = await supabasePublic
+    const supabase = getSupabasePublic();
+    const { data: products } = await supabase
       .from('products')
       .select('slug')
       .eq('active', true);
 
-    return products?.map((product) => ({
-      id: product.slug,
-    })) || [];
+    return products?.map((product) => ({ id: product.slug })) || [];
   } catch (error) {
     console.error('Failed to generate static params:', error);
     return [];
   }
 }
 
-// Generate metadata for SEO
 export async function generateMetadata({ params }: ProductPageProps) {
-  const { id } = await params;
+  const { id } = params;
   const product = await getProduct(id);
 
   if (!product) {
-    return {
-      title: 'Product Not Found',
-    };
+    return { title: 'Product Not Found' };
   }
 
   return {
