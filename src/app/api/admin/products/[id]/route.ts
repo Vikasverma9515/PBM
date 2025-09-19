@@ -10,9 +10,10 @@ async function requireAdmin() {
   return session
 }
 
-export async function PATCH(request: Request, { params }: { params: { id: string } }) {
+export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await requireAdmin()
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  const { id } = await params
   const body = await request.json()
   const { error } = await supabaseAdmin.from('products').update({
     slug: body.slug,
@@ -31,15 +32,16 @@ export async function PATCH(request: Request, { params }: { params: { id: string
     videos: body.videos,
     combined_products: body.combined_products,
     stock: body.stock,
-  }).eq('id', params.id)
+  }).eq('id', id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json({ ok: true })
 }
 
-export async function DELETE(_request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await requireAdmin()
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  const { error } = await supabaseAdmin.from('products').delete().eq('id', params.id)
+  const { id } = await params
+  const { error } = await supabaseAdmin.from('products').delete().eq('id', id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json({ ok: true })
 }

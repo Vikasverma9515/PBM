@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { ShoppingCart, Minus, Plus } from "lucide-react";
-import type { Product } from "@/utils/products";
+import type { Product } from "@/types/Product";
 
 type Props = { product: Product };
 

@@ -21,9 +21,12 @@ export async function POST(request: Request) {
     // If user exists already, fetch it to proceed
     let userId = authUser?.user?.id as string | undefined
     if (authError && (authError as any).message?.toLowerCase().includes('user already registered')) {
-      const { data: existing, error: fetchErr } = await supabaseAdmin.auth.admin.listUsers({ page: 1, perPage: 1, email }) as any
+      const { data: existing, error: fetchErr } = await supabaseAdmin.auth.admin.listUsers({ page: 1, perPage: 1 })
       if (!fetchErr && existing?.users?.length) {
-        userId = existing.users[0].id
+        const user = existing.users.find((u: any) => u.email === email)
+        if (user) {
+          userId = user.id
+        }
       }
     }
 

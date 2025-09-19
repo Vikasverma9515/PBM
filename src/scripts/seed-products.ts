@@ -20,7 +20,7 @@ export async function seedProducts() {
     const dbProducts = productsData.map(product => ({
       slug: product.slug,
       name: product.name,
-      short_description: product.shortDescription,
+      short_description: product.short_description,
       description: product.description,
       images: product.images,
       price: product.price,
@@ -28,10 +28,10 @@ export async function seedProducts() {
       features: product.features,
       specifications: product.specifications,
       benefits: product.benefits,
-      whats_in_box: product.whatsInBox,
-      user_guides: product.userGuides,
+      whats_in_box: product.whats_in_box,
+      user_guides: product.user_guides,
       videos: product.videos,
-      combined_products: product.combinedProducts || [],
+      combined_products: product.combined_products || [],
       stock: 100, // Set initial stock
       active: true
     }));

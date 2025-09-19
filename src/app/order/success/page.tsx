@@ -1,6 +1,6 @@
 // app/order/success/page.tsx
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import Header from '@/components/header';
@@ -12,7 +12,7 @@ type OrderDetails = {
   sessionId: string | null;
 };
 
-export default function OrderSuccess() {
+function OrderSuccessContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { clearCart } = useCart();
@@ -74,4 +74,12 @@ export default function OrderSuccess() {
             </div>
         </main>
     );
+}
+
+export default function OrderSuccess() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OrderSuccessContent />
+    </Suspense>
+  );
 }

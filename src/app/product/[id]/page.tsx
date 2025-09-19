@@ -35,9 +35,9 @@ import { createClient } from '@/lib/supabase/server';
 import { Product } from '@/types/Product';
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 async function getProduct(slug: string): Promise<Product | null> {
@@ -63,7 +63,8 @@ async function getProduct(slug: string): Promise<Product | null> {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const product = await getProduct(params.id);
+  const { id } = await params;
+  const product = await getProduct(id);
 
   if (!product) {
     notFound();
@@ -79,9 +80,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
 // Generate static params for all products (optional for better performance)
 export async function generateStaticParams() {
   try {
-    const supabase = await createClient();
+    const { supabaseAdmin } = await import('@/lib/supabase/admin');
     
-    const { data: products } = await supabase
+    const { data: products } = await supabaseAdmin
       .from('products')
       .select('slug')
       .eq('active', true);
@@ -97,7 +98,8 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: ProductPageProps) {
-  const product = await getProduct(params.id);
+  const { id } = await params;
+  const product = await getProduct(id);
 
   if (!product) {
     return {
