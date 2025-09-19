@@ -13,6 +13,13 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: [
+      'images.unsplash.com',
+      'via.placeholder.com',
+    ],
+  },
+  serverExternalPackages: ['@supabase/supabase-js'],
 }
 
 module.exports = nextConfig
