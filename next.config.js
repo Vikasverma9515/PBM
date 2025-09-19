@@ -21,6 +21,10 @@ const nextConfig = {
     ],
   },
   serverExternalPackages: ['@supabase/supabase-js'],
+  // Silence workspace root warning when another lockfile exists up the tree
+  turbopack: {
+    root: __dirname,
+  },
 }
 
 module.exports = nextConfig

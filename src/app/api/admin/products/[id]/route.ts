@@ -1,5 +1,5 @@
 // app/api/admin/products/[id]/route.ts
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { supabaseAdmin } from '@/lib/supabase/admin'
@@ -10,10 +10,10 @@ async function requireAdmin() {
   return session
 }
 
-export async function PATCH(request: Request, { params }: { params: { id: string } }) {
+export async function PATCH(request: NextRequest, context: { params: Promise<{ id: string }> }) {
   const session = await requireAdmin()
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  const { id } = params
+  const { id } = await context.params
   const body = await request.json()
   const { error } = await supabaseAdmin.from('products').update({
     slug: body.slug,
@@ -37,10 +37,10 @@ export async function PATCH(request: Request, { params }: { params: { id: string
   return NextResponse.json({ ok: true })
 }
 
-export async function DELETE(_request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_request: NextRequest, context: { params: Promise<{ id: string }> }) {
   const session = await requireAdmin()
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  const { id } = params
+  const { id } = await context.params
   const { error } = await supabaseAdmin.from('products').delete().eq('id', id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json({ ok: true })
