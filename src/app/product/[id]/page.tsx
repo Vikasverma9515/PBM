@@ -80,9 +80,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
 // Generate static params for all products (optional for better performance)
 export async function generateStaticParams() {
   try {
-    const { supabaseAdmin } = await import('@/lib/supabase/admin');
-    
-    const { data: products } = await supabaseAdmin
+    const supabase = await createClient();
+
+    const { data: products } = await supabase
       .from('products')
       .select('slug')
       .eq('active', true);
