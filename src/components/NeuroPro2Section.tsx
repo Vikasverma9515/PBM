@@ -5,7 +5,7 @@ import { MoveRight } from 'lucide-react';
 
 const NeuroPro2Section: React.FC = () => {
     return (
-        <div className="min-h-screen bg-black text-white py-8 lg:py-14">
+        <div className=" bg-black text-white py-8 lg:py-14">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Main Content and Hero Image Section */}

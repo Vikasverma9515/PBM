@@ -207,7 +207,7 @@ const ProductsSection: React.FC = () => {
     };
 
     return (
-        <div className="py-12 lg:py-16 bg-white">
+        <div className="py-12 lg:py-0 lg:pt-20 bg-white">
             {/* Products Section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header - Responsive */}

@@ -69,7 +69,7 @@ const ProductsSection: React.FC = () => {
   const visibleProducts = showAll ? allProducts : allProducts.slice(0, 3);
 
   return (
-    <div className="py-16 bg-white">
+    <div className="py-0 lg:pt-10 bg-white">
       {/* Products Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header - Desktop unchanged */}
